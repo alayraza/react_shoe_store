@@ -7,7 +7,7 @@ export const Slider = () => {
             <React.Fragment>
                 <CssBaseline />
                 <Container maxWidth="sm">
-                    <img alt="shoe image" src={require("../images/shoes1.gif")}/>
+                    <img alt="shoe" src={require("../images/shoes1.gif")}/>
                 </Container>
             </React.Fragment>
         </div>
