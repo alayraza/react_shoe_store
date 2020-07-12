@@ -1,25 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import {Routes, Route} from 'react-router-dom'
+import { Products } from './components/Products';
+import { Nike } from './components/Nike';
+import { Catterpillar } from './components/Catterpillar';
+import { Adidas } from './components/Adidas';
+import { makeStyles } from '@material-ui/core';
+const useStyles = makeStyles((theme) => ({
+  props: {
+      ...theme.typography.button,
+      padding: theme.spacing(4),
+      textAlign: 'center',
+      background:'#3f51b5',
+      color:'#ffff'
+  },
+}));
 function App() {
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+          <Route path="/" element={<Products/>}>
+            <Route path="/home" element={<Products/>}></Route>
+          </Route>
+          <Route path="/Nike" element={<Nike/>}></Route>
+          <Route path="/Catterpillar" element={<Catterpillar/>}></Route>
+          <Route path="/Adidas" element={<Adidas/>}></Route>
+      </Routes>
+      <div className={classes.props}>{"Footer"}</div>
+    </>
   );
 }
 
