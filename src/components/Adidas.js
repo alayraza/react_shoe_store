@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { Container, Paper, Grid, makeStyles, Typography, Button } from '@material-ui/core'
-import { Header } from './Header';
+import Header from './Header';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import {Addtocart} from '../actions/Addtocart';
+import {connect} from 'react-redux';
 const useStyles = makeStyles((theme) => ({
     root: {
       backgroundColor: theme.palette.background.paper,
@@ -20,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const Adidas = () => {
+const Adidas = (propsVal) => {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
@@ -45,7 +47,7 @@ export const Adidas = () => {
                                     </Typography>
                                     <Typography>Adidas</Typography>
                                     <Typography>$250.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'1','productManufacturer':'Adidas','productName':'Black Stripe','price':'$250','img':require("../images/adi/adi1.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                     Shop Now
                                     </Button>
                                 </Paper>
@@ -58,7 +60,7 @@ export const Adidas = () => {
                                     </Typography>
                                     <Typography>Adidas</Typography>
                                     <Typography>$130.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'2','productManufacturer':'Adidas','productName':'4D Run','price':'$130','img':require("../images/adi/adi2.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                     Shop Now
                                     </Button>
                                 </Paper>
@@ -71,7 +73,7 @@ export const Adidas = () => {
                                     </Typography>
                                     <Typography>Adidas</Typography>
                                     <Typography>$130.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'3','productManufacturer':'Adidas','productName':'Cloudform','price':'$130','img':require("../images/adi/adi3.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                     Shop Now
                                     </Button>
                                 </Paper>
@@ -88,7 +90,7 @@ export const Adidas = () => {
                                     </Typography>
                                     <Typography>Adidas</Typography>
                                     <Typography>$250.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'4','productManufacturer':'Adidas','productName':'UltraBoost','price':'$250','img':require("../images/adi/adi4.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                     Shop Now
                                     </Button>
                                 </Paper>
@@ -101,7 +103,7 @@ export const Adidas = () => {
                                     </Typography>
                                     <Typography>Adidas</Typography>
                                     <Typography>$130.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'5','productManufacturer':'Adidas','productName':'Zoom','price':'$130','img':require("../images/adi/adi5.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                     Shop Now
                                     </Button>
                                 </Paper>
@@ -114,7 +116,7 @@ export const Adidas = () => {
                                     </Typography>
                                     <Typography>Adidas</Typography>
                                     <Typography>$130.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'6','productManufacturer':'Adidas','productName':'Zoom Terra','price':'$130','img':require("../images/adi/adi1.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                     Shop Now
                                     </Button>
                                 </Paper>
@@ -131,7 +133,7 @@ export const Adidas = () => {
                                     </Typography>
                                     <Typography>Adidas</Typography>
                                     <Typography>$250.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'7','productManufacturer':'Adidas','productName':'Vaporfly','price':'$250','img':require("../images/adi/adi5.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                         Shop Now
                                     </Button>
                                     </Paper>
@@ -144,7 +146,7 @@ export const Adidas = () => {
                                     </Typography>
                                     <Typography>Adidas</Typography>
                                     <Typography>$130.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'8','productManufacturer':'Adidas','productName':'Kiger 6','price':'$130','img':require("../images/adi/adi4.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                         Shop Now
                                     </Button>
                                     </Paper>
@@ -157,7 +159,7 @@ export const Adidas = () => {
                                     </Typography>
                                     <Typography>Adidas</Typography>
                                     <Typography>$130.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'9','productManufacturer':'Adidas','productName':'Air Zoom','price':'$130','img':require("../images/adi/adi3.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                         Shop Now
                                     </Button>
                                     </Paper>
@@ -183,3 +185,9 @@ export const Adidas = () => {
         </>
     )
 }
+const mapDispatchToProp =(dispatch)=>{
+    return {
+        dispatchtoAction:(name)=>{dispatch(Addtocart(name))}
+    }
+  }
+export default connect(null,mapDispatchToProp)(Adidas)

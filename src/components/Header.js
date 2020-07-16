@@ -11,6 +11,11 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AppsIcon from '@material-ui/icons/Apps';
 import HomeIcon from '@material-ui/icons/Home';
 import clsx from 'clsx';
+import {connect} from 'react-redux';
+import Popper from '@material-ui/core/Popper';
+import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
+import Fade from '@material-ui/core/Fade';
+import Cartlist from './Cartlist';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -73,7 +78,10 @@ const useStyles = makeStyles((theme) => ({
     },
     cart:{
         color:'white'
-    }
+    },
+    fade: {
+      padding: theme.spacing(2),
+    },
   }));
   const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -83,7 +91,9 @@ const useStyles = makeStyles((theme) => ({
       padding: '0 4px',
     },
   }))(Badge);
-export const Header = () => {
+
+const Header = (props) => {
+    // console.log("total",props.value.cart.length)
     const classes = useStyles();
     const navigate = useNavigate();
     const [state, setState] = React.useState({
@@ -132,13 +142,33 @@ export const Header = () => {
                     <Typography className={classes.title} variant="h6" noWrap>
                         Shoes Store
                     </Typography>
-                    <IconButton aria-label="cart">
-                        <StyledBadge badgeContent={4} color="secondary">
-                            <ShoppingCartIcon className={classes.cart}/>
-                        </StyledBadge>
-                    </IconButton>
+                    <PopupState variant="popper" popupId="demo-popup-popper">
+                      {(popupState) => (
+                        <div>
+                          <IconButton aria-label="cart" {...bindToggle(popupState)}>
+                            <StyledBadge badgeContent={props.value.cart.length} color="secondary">
+                                <ShoppingCartIcon className={classes.cart}/>
+                            </StyledBadge>
+                          </IconButton>
+                          <Popper {...bindPopper(popupState)} transition>
+                            {({ TransitionProps }) => (
+                              <Fade {...TransitionProps} timeout={350}>
+                                <Cartlist/>
+                              </Fade>
+                            )}
+                          </Popper>
+                        </div>
+                      )}
+                    </PopupState>  
                 </Toolbar>
-            </AppBar>     
+            </AppBar>
+               
         </div>
     )
 }
+const mapStateToProp =(state)=>{
+  return {
+      value:state
+  }
+}
+export default connect(mapStateToProp)(Header)

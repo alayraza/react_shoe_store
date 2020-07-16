@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { Container, Paper, Grid, makeStyles, Typography, Button } from '@material-ui/core'
-import { Header } from './Header';
+import Header from './Header';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import {Addtocart} from '../actions/Addtocart';
+import {connect} from 'react-redux';
 const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: theme.palette.background.paper,
@@ -22,10 +24,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const Nike = () => {
+const Nike = (propsVal) => {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
+    console.log(propsVal);
     const classes = useStyles();
     const navigate = useNavigate();
     return (
@@ -47,10 +50,11 @@ export const Nike = () => {
                                     </Typography>
                                     <Typography>Nike</Typography>
                                     <Typography>$250.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'1','productManufacturer':'Nike','productName':'ZoomX Vaporfly Next%','price':'$250','img':require("../images/nike/nike1.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                         Shop Now
                                     </Button>
                                     </Paper>
+                                    {/* ()=>Addtocart({'cart':{'productId':'1','productManufacturer':'Nike','productName':'ZoomX Vaporfly Next%','price':'250'}}) */}
                                 </Grid>
                                 <Grid item xs={4}>
                                     <Paper className={classes.paper}>
@@ -60,7 +64,7 @@ export const Nike = () => {
                                     </Typography>
                                     <Typography>Nike</Typography>
                                     <Typography>$130.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'2','productManufacturer':'Nike','productName':'Air Zoom Terra Kiger 6','price':'$130','img':require("../images/nike/nike2.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                         Shop Now
                                     </Button>
                                     </Paper>
@@ -73,7 +77,7 @@ export const Nike = () => {
                                     </Typography>
                                     <Typography>Nike</Typography>
                                     <Typography>$130.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'3','productManufacturer':'Nike','productName':'Air Zoom Terra Kiger 6','price':'$130','img':require("../images/nike/nike3.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                         Shop Now
                                     </Button>
                                     </Paper>
@@ -90,7 +94,7 @@ export const Nike = () => {
                                     </Typography>
                                     <Typography>Nike</Typography>
                                     <Typography>$250.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'4','productManufacturer':'Nike','productName':'ZoomX Vaporfly Next%','price':'$250','img':require("../images/nike/nike4.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                         Shop Now
                                     </Button>
                                     </Paper>
@@ -103,7 +107,7 @@ export const Nike = () => {
                                     </Typography>
                                     <Typography>Nike</Typography>
                                     <Typography>$130.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'5','productManufacturer':'Nike','productName':'Air Zoom Terra Kiger 6','price':'$130','img':require("../images/nike/nike5.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                         Shop Now
                                     </Button>
                                     </Paper>
@@ -116,7 +120,7 @@ export const Nike = () => {
                                     </Typography>
                                     <Typography>Nike</Typography>
                                     <Typography>$130.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'6','productManufacturer':'Nike','productName':'Air Zoom Terra Kiger 6','price':'$130','img':require("../images/nike/nike3.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                         Shop Now
                                     </Button>
                                     </Paper>
@@ -133,7 +137,7 @@ export const Nike = () => {
                                     </Typography>
                                     <Typography>Nike</Typography>
                                     <Typography>$250.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'7','productManufacturer':'Nike','productName':'ZoomX Vaporfly Next%','price':'$250','img':require("../images/nike/nike5.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                         Shop Now
                                     </Button>
                                     </Paper>
@@ -146,7 +150,7 @@ export const Nike = () => {
                                     </Typography>
                                     <Typography>Nike</Typography>
                                     <Typography>$130.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'8','productManufacturer':'Nike','productName':'Air Zoom Terra Kiger 6','price':'$130','img':require("../images/nike/nike2.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                         Shop Now
                                     </Button>
                                     </Paper>
@@ -159,7 +163,7 @@ export const Nike = () => {
                                     </Typography>
                                     <Typography>Nike</Typography>
                                     <Typography>$130.00</Typography>
-                                    <Button variant="contained" color="primary">
+                                    <Button onClick={()=>{propsVal.dispatchtoAction({'cart':{'productId':'9','productManufacturer':'Nike','productName':'Air Zoom Terra Kiger 6','price':'$130','img':require("../images/nike/nike3.jpg"),'quantity':1}})}} variant="contained" color="primary">
                                         Shop Now
                                     </Button>
                                     </Paper>
@@ -185,3 +189,14 @@ export const Nike = () => {
         </>
     )
 }
+const mapStateToProp =(state)=>{
+    return {
+        value:state
+    }
+}
+const mapDispatchToProp =(dispatch)=>{
+    return {
+        dispatchtoAction:(name)=>{dispatch(Addtocart(name))}
+    }
+}
+export default connect(mapStateToProp,mapDispatchToProp)(Nike)

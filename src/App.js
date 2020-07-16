@@ -1,10 +1,11 @@
 import React from 'react';
 import {Routes, Route} from 'react-router-dom'
-import { Products } from './components/Products';
-import { Nike } from './components/Nike';
-import { Catterpillar } from './components/Catterpillar';
-import { Adidas } from './components/Adidas';
+import Products from './components/Products';
+import Nike from './components/Nike';
+import Catterpillar from './components/Catterpillar';
+import Adidas from './components/Adidas';
 import { makeStyles } from '@material-ui/core';
+import {connect} from 'react-redux';
 const useStyles = makeStyles((theme) => ({
   props: {
       ...theme.typography.button,
@@ -14,8 +15,9 @@ const useStyles = makeStyles((theme) => ({
       color:'#ffff'
   },
 }));
-function App() {
+function App(propsVal) {
   const classes = useStyles();
+  // console.log(propsVal);
   return (
     <>
       <Routes>
@@ -31,4 +33,10 @@ function App() {
   );
 }
 
-export default App;
+// export default App;
+const mapStateToProp =(state)=>{
+  return {
+      value:state
+  }
+}
+export default connect(mapStateToProp)(App)
